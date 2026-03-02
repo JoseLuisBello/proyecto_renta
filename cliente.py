@@ -4,18 +4,8 @@ from tkinter import ttk, messagebox
 import threading
 import time
 
-
-# =============================
-# CONFIG
-# =============================
-
-SERVER_IP = "10.10.200.6"   # 👈 CAMBIA ESTA IP
+SERVER_IP = "10.10.200.6"
 PORT = 8000
-
-
-# =============================
-# CLIENTE APP
-# =============================
 
 class ClientGUI:
 
@@ -33,11 +23,6 @@ class ClientGUI:
 
         self.setup_style()
         self.create_widgets()
-
-
-    # =============================
-    # CONECTAR
-    # =============================
 
     def connect(self):
 
@@ -58,11 +43,6 @@ class ClientGUI:
             )
 
             self.root.quit()
-
-
-    # =============================
-    # ESTILO
-    # =============================
 
     def setup_style(self):
 
@@ -89,11 +69,6 @@ class ClientGUI:
             background="#2563eb",
             foreground="white"
         )
-
-
-    # =============================
-    # UI
-    # =============================
 
     def create_widgets(self):
 
@@ -227,10 +202,6 @@ class ClientGUI:
         self.text.pack(fill="both", expand=True)
 
 
-    # =============================
-    # DATOS
-    # =============================
-
     def load_data(self):
 
         for row in self.tree.get_children():
@@ -251,42 +222,29 @@ class ClientGUI:
                 )
             )
 
-
-    # =============================
-    # RENTA
-    # =============================
-
     def start_rent(self):
 
         threading.Thread(
             target=self.rent
         ).start()
 
-
     def rent(self):
-
         try:
-
             vehicle = self.vehicle.get()
             persons = int(self.persons.get())
             days = int(self.days.get())
 
         except:
-
             messagebox.showwarning(
                 "Error",
                 "Datos inválidos"
             )
-
             return
-
-
         response = self.server.rent(
             vehicle,
             persons,
             days
         )
-
 
         self.text.insert(
             tk.END,
@@ -295,23 +253,11 @@ class ClientGUI:
 
 
         self.refresh()
-
-
-    # =============================
-    # REFRESH
-    # =============================
-
+        
     def refresh(self):
-
         self.vehicles = self.server.get_vehicles()
-
         self.load_data()
 
-
-
-# =============================
-# MAIN
-# =============================
 
 def main():
 

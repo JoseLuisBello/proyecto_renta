@@ -5,18 +5,9 @@ from tkinter import ttk, scrolledtext
 from socketserver import ThreadingMixIn
 from xmlrpc.server import SimpleXMLRPCServer
 
-
-# =============================
-# SERVIDOR MULTIHILO
-# =============================
-
 class ThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer):
     pass
 
-
-# =============================
-# SERVICIO PRINCIPAL
-# =============================
 
 class RentalService:
 
@@ -108,11 +99,6 @@ class RentalService:
                 f"Total: ${total} MXN"
             )
 
-
-# =============================
-# INTERFAZ SERVIDOR
-# =============================
-
 class ServerGUI:
 
     def __init__(self, root):
@@ -185,12 +171,6 @@ class ServerGUI:
         self.log(f"IP: {ip}")
 
         server.serve_forever()
-
-
-
-# =============================
-# MAIN
-# =============================
 
 def main():
 
